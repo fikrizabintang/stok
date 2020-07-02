@@ -31,13 +31,11 @@ class API_ObatController extends Controller
           ];
 
           foreach($barang as $key => $post) {
-              $harga_rajal  = ( (($post->margin_resep_rajal / 100) * $post->hpp) + $post->hpp - 0.01);
               $sisa_stok    = $this->inventoryRepositories->sisaStok($post->id);
 
               $data['data'][$key] = [
                   'id'              => $post->id,
                   'nama'            => $post->nama_lengkap,
-                  'harga'           => number_format((float) round($harga_rajal, 2), 2, ',', '.'),
                   'id_sediaan'      => $post->id_sediaan,
                   'stok'            => $sisa_stok,
               ];
