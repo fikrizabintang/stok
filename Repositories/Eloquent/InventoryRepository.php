@@ -18,9 +18,13 @@ class InventoryRepository
 
     public function sisaStok($id)
     {
-        $get = Stok::select('masuk','keluar')->where('id_barang', $id)
-        ->where('id_unit', Auth::user()->id_unit)
-        ->where('ed', '>', Carbon::now())->limit(1000);
+        $get = Stok::
+        where([
+              'id_barang'   => $id,
+              'id_unit'     => Auth::user()->id_unit
+        ])
+        ->where('ed', '>', Carbon::now())
+        ->limit(1000);
         $sum = ($get->sum('masuk') - $get->sum('keluar'));
         return $sum;
     }
