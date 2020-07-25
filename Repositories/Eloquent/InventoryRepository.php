@@ -1,32 +1,37 @@
 <?php
 
 namespace App\Repositories\Eloquent;
-use App\Models\Inventory\Stok;
 
 use Carbon\Carbon;
 use Auth;
+use DB;
+use Cache;
 
 class InventoryRepository
 {
 
-    protected $date;
-
-    public function __construct(Carbon $date)
+    public function sisaStok()
     {
-        $this->date = $date->now()->format('Y-m-d');
-    }
+        $currentPage = request()->get('page',1);
 
-    public function sisaStok($id)
-    {
-        $get = Stok::
-        where([
-              'id_barang'   => $id,
-              'id_unit'     => Auth::user()->id_unit
-        ])
-        ->where('ed', '>', Carbon::now())
-        ->limit(1000);
-        $sum = ($get->sum('masuk') - $get->sum('keluar'));
-        return $sum;
+        $v = Cache::remember('dc_barang' . $currentPage, 10, function() {
+            $id_unit  = Auth::user()->id_unit;
+            $date     = Carbon::now()->format('Y-m-d');
+            $cari     = request()->q;
+            $barang  = DB::table('dc_barang')
+            ->selectRaw(
+              "dc_barang.id,
+              dc_barang.nama_lengkap,
+              sisa_stok(dc_barang.id, $id_unit, $date) as stok
+            ")
+            ->join('dc_barang_unit','dc_barang_unit.id_barang','=','dc_barang.id')
+            ->where('nama', 'like', "$cari%")
+            ->where('aktif', 'Ya')
+            ->where('id_unit', $id_unit)->orderBy('dc_barang.id','asc');
+
+        });
+
+        return response()->json($v);
     }
 
 
