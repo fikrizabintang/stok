@@ -8,10 +8,6 @@ table stok <br>
 
 ![alt text](https://github.com/fikrizabintang/stok/blob/master/dc_stok.png)
 
-Fungsi langsung dari db Mysql<br>
-
-![alt text](https://github.com/fikrizabintang/stok/blob/master/fungsi%20sql%20sisa_stok)
-
 json <br>
 
 ![alt text](https://github.com/fikrizabintang/stok/blob/master/image.png)
