@@ -1,0 +1,8 @@
+CREATE DEFINER=`root`@`localhost` FUNCTION `sisa_stok`(p_id_barang INT(11), p_id_unit INT(11), p_ed DATE) RETURNS INT(4)
+BEGIN
+    DECLARE v_hasil DECIMAL(14, 2) DEFAULT 0;
+    
+    SELECT IFNULL(SUM(masuk) - SUM(keluar), 0) INTO v_hasil FROM dc_stok WHERE id_barang = p_id_barang AND id_unit = p_id_unit AND ed > p_ed;
+
+    RETURN v_hasil;
+END$$
