@@ -8,10 +8,10 @@ table stok <br>
 
 ![alt text](https://github.com/fikrizabintang/stok/blob/master/dc_stok.png)
 
-json
+json <br>
 ![alt text](https://github.com/fikrizabintang/stok/blob/master/image.png)
 
-select
+select <br>
 ![alt text](https://github.com/fikrizabintang/stok/blob/master/Untitled.png)
 
 
