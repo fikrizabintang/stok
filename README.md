@@ -10,7 +10,7 @@ table stok <br>
 
 Fungsi langsung dari db Mysql<br>
 
-https://github.com/fikrizabintang/stok/blob/master/fungsi%20sql%20sisa_stok
+![alt text](https://github.com/fikrizabintang/stok/blob/master/fungsi%20sql%20sisa_stok)
 
 json <br>
 
